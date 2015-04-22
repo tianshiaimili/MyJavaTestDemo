@@ -1,1 +1,1 @@
-https://github.com/tianshiaimili/Z_MyJavaTest.git 
+https://github.com/tianshiaimili/MyJavaTestDemo.git

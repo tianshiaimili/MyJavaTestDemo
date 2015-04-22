@@ -22,12 +22,15 @@ public class TestJackson {
 		
 		//下面是json 2 bean
 //		test.readJson2Entity();
-		//
-//		test.readJson2List();
+//		//
 		//
 //		test.readJson2Array();
 		//
-		test.readJson2Map();
+		test.readJson2List();
+//		test.readJson2Map2();
+		
+//		String result = 
+		
 		
 	}
 	

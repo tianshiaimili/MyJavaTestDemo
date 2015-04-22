@@ -9,12 +9,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import org.codehaus.jackson.JsonEncoding;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.JsonNodeFactory;
+
+
+/**
+ * 
+ * 这是一个测试jackson的工具类
+ * 
+ * @author zero
+ *
+ */
 
 public class JacksonTest {
 	   private JsonGenerator jsonGenerator = null;
@@ -275,8 +284,8 @@ public class JacksonTest {
 	     * @createDate 2010-11-23 下午06:12:01
 	     */
 	    public void readJson2List() {
-	        String json = "[{\"address\": \"北海\",\"name\":\"haha2\",\"id\":2,\"email\":\"email2\"},"+
-	                    "{\"address\":\"北海之家\",\"name\":\"haha\",\"id\":1,\"email\":\"email\"}]";
+	        String json = "[  {\"address\": \"北海\",\"name\":\"haha2\",\"id\":2,\"email\":\"email2\"},"+
+	                    "{\"address\":\"北海之家\",\"name\":\"haha\",\"id\":1,\"email\":\"email\"}  ]";
 	        try {
 	            List<LinkedHashMap<String, Object>> list = objectMapper.readValue(json, List.class);
 	            System.out.println(list.size());
@@ -354,5 +363,37 @@ public class JacksonTest {
 	        }
 	    }
 	    
+	    ////////////////////////////////
+	    
+	    /**
+	     * <b>function:</b>json字符串转换Map集合
+	     * @author hoojo
+	     * @createDate Nov 27, 2010 3:00:06 PM
+	     */
+	    public void readJson2NewModles() {
+	        String json = "{\"success\":true,\"A\":{\"address\": \"address2\",\"name\":\"haha2\",\"id\":2,\"email\":\"email2\"},"+
+	                    "\"B\":{\"address\":\"address\",\"name\":\"haha\",\"id\":1,\"email\":\"email\"}}";
+	        
+	        String json2 = "{\"T1348647909107\":[{\"Address\": \"北海拉\",\"Name\":\"haha2\",\"id\":2,\"email\":\"email2\"},{\"address\":\"福成拉\",\"name\":\"haha\",\"id\":1,\"email\":\"email\"}"
+	        		+ ",{\"address\":\"福成拉123\",\"name\":[{\"Test1\": \"北海拉\",\"Test2\":\"haha2\"}],\"id\":1,\"email\":\"email\"}]}";
+	        
+	        try {
+	            Map<String, Map<String, Object>> maps = objectMapper.readValue(json2, Map.class);
+	            System.out.println(maps.size());
+	            Set<String> key = maps.keySet();
+	            
+	            Iterator<String> iter = key.iterator();
+	            while (iter.hasNext()) {
+	                String field = iter.next();
+	                System.out.println(field + ":" + maps.get(field));
+	            }
+	        } catch (JsonParseException e) {
+	            e.printStackTrace();
+	        } catch (JsonMappingException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	    
 }

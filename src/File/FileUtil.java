@@ -1,5 +1,7 @@
 package File;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,11 +9,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.Iterator;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.FormAction;
+import com.mysql.jdbc.log.LogUtils;
 
 /**
  * 
@@ -88,6 +90,57 @@ public class FileUtil {
 		}
 	}
 
+	 /**
+     * 复制文件夹的文件到另一个文件夹
+     * @param originDirectory
+     * @param targetDirectory
+     */
+    public static void copyFolder(String originDirectory,String targetDirectory){
+        File origindirectory = new File(originDirectory);   //源路径File实例
+        File targetdirectory = new File(targetDirectory);  //目标路径File实例
+        if(!origindirectory.isDirectory() || !targetdirectory.isDirectory()){    //判断是不是正确的路径
+                    System.out.println("不是正确的目录！");
+//                    LogUtils.e("不是正确的目录！");
+                    return;
+        }
+        File[] fileList = origindirectory.listFiles();  //目录中的所有文件
+        for(File file : fileList){
+                  if(!file.isFile())   //判断是不是文件
+                  continue;
+                  System.out.println(file.getName());
+//                  LogUtils.e("fileName "+file.getName());
+                  try{
+                           FileInputStream fin = new FileInputStream(file);
+                           BufferedInputStream bin = new BufferedInputStream(fin);
+                           PrintStream pout = new PrintStream(targetdirectory.getAbsolutePath()+"/"+file.getName());
+                           BufferedOutputStream bout = new BufferedOutputStream(pout);
+                           int total =bin.available();  //文件的总大小
+                           int percent = total/100;    //文件总量的百分之一
+                           int count;
+                           while((count = bin.available())!= 0){
+                                      int c = bin.read();  //从输入流中读一个字节
+                                      bout.write((char)c);  //将字节（字符）写到输出流中     
+
+                                      if(((total-count) % percent) == 0){
+                                               double d = (double)(total-count) / total; //必须强制转换成double
+//                                               System.out.println(Math.round(d*100)+"%"); //输出百分比进度
+//                                               LogUtils.e(Math.round(d*100)+"%");
+                                       }
+                           }
+                           bout.close();
+                           pout.close();
+                           bin.close();
+                           fin.close();
+                  }catch(IOException e){
+                           e.printStackTrace();
+                  }
+       }
+      System.out.println("End");
+//      LogUtils.e("end---------------------");
+      
+}
+	
+	
 	/**
 	 * @param args
 	 */
@@ -95,9 +148,12 @@ public class FileUtil {
 		// TODO Auto-generated method stub
 //		File file = new File("D:\\个人资料\\MySQL 5");
 //		list(file);
-		Date myDate = new Date(); 
-		DateFormat df = DateFormat.getDateInstance();
-		System.out.println(df.format(myDate)); 
+//		Date myDate = new Date(); 
+//		DateFormat df = DateFormat.getDateInstance();
+//		System.out.println(df.format(myDate)); 
+		
+		copyFolder("F:/testCopy","F:/TestCopyTag");
+		
 	}
 
 }

@@ -85,7 +85,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String format(Date date) {
-		return format(date, "yyyy/MM/dd");
+		return format(date, "yyyy/MM/dd/mm/ss");
 	}
 
 	/**

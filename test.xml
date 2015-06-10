@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Devices>
+	<Device>
+		<number id="1">
+			<deviceID>001</deviceID>
+			<regID>100456566asdasdasd</regID>
+		</number>
+	</Device>
+	<Device>
+		<number id="2">
+			<deviceID>008</deviceID>
+			<regID>00000000000000000000000000</regID>
+		</number>
+	</Device>
+	<Device>
+		<number id="3">
+			<deviceID>007</deviceID>
+			<regID>lallalala</regID>
+		</number>
+	</Device>
+	<Device>
+		<number id="4">
+			<deviceID />
+			<regID>00000000000000000000000000</regID>
+		</number>
+	</Device>
+	<Device>
+		<number id="5">
+			<deviceID></deviceID>
+			<regID>8888888888888888888</regID>
+		</number>
+	</Device>
+</Devices>

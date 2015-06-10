@@ -9,5 +9,9 @@
 			<price>699</price>
 			<operator>ChinaNet</operator>
 		</type>
+		<type name="nokia12">
+			<price>599123</price>
+			<operator>CMCC123</operator>
+		</type>
 	</TelePhone>
 </root>
